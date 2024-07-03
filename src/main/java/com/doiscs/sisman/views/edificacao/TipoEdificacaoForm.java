@@ -34,50 +34,38 @@ public class TipoEdificacaoForm extends CadastroFormBase<TipoEdificacao> {
 
     public TipoEdificacaoForm() {
         super("tipo edificação");
-
         binder.forField(isAtivo).bind(TipoEdificacao::isAtivo, TipoEdificacao::setAtivo);
-
     }
 
     @Override
     protected void clearBinder() {
-
         tipoEdificacao = new TipoEdificacao();
         binder.readBean(tipoEdificacao);
-
     }
 
     @Override
     protected boolean delete() {
-
         try {
             binder.writeBean(tipoEdificacao);
             service.delete(tipoEdificacao);
-
             showSucess("Tipo de Edificação removido com sucesso.");
-
             return true;
-
         } catch (ValidationException e) {
             showError("Erro ao remover Tipo de Edificação.");
             e.printStackTrace();
         } catch (DataIntegrityViolationException e) {
             showWarnig("Tipo de Edificação não pode ser removido pois esta em uso.");
         }
-
         return false;
     }
 
     @Override
     protected boolean save() {
-
         String msg = "Tipo Edificação alterado com sucesso.";
-
         if (!isEditMode) {
             tipoEdificacao = new TipoEdificacao();
             msg = "Tipo Edificação cadastrado com sucesso.";
         }
-
         try {
             binder.writeBean(tipoEdificacao);
             service.save(tipoEdificacao);
@@ -85,51 +73,37 @@ public class TipoEdificacaoForm extends CadastroFormBase<TipoEdificacao> {
             return true;
 
         } catch (ValidationException e) {
-
             showWarnig("Verique os campos obrigatórios.");
-
         } catch (DataIntegrityViolationException e) {
-
             showWarnig("Tipo Edificação já cadastrado, verique.");
-
         }
-
         return false;
-
     }
 
     @Override
     protected void initViewComponents() {
-
         nome = new TextField("Nome");
         descricao = new TextField("Descrição");
         isAtivo = new Checkbox("Ativo ?", true);
-
         super.formLayout.add(isAtivo, nome, descricao);
-
     }
 
     @Override
     protected void initBinder() {
         binder = new BeanValidationBinder<TipoEdificacao>(TipoEdificacao.class);
         binder.bindInstanceFields(this);
-
     }
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-
         if (isEditMode) {
             configureToEdit();
         }
-
     }
 
     @Override
     protected void configureToEdit() {
         this.tipoEdificacao = (TipoEdificacao) getEntityToEdit();
         binder.readBean(tipoEdificacao);
-
     }
-
 }

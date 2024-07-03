@@ -51,7 +51,6 @@ public abstract class ListFormBase<T, SERVICE extends ServiceInterface<T>> exten
         initViewComponents();
 
         configureGrid();
-
     }
 
     /**

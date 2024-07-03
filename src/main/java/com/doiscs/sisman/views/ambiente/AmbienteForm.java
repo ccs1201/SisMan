@@ -25,16 +25,14 @@ import com.vaadin.flow.router.Route;
 @PageTitle("Cadastro Ambiente")
 @Route(value = "ambiente", layout = MainLayout.class)
 public class AmbienteForm extends CadastroFormBaseGenerics<Ambiente, AmbienteService> {
-
-    private static final long serialVersionUID = -8621758791825558418L;
-    Ambiente ambiente;
+    private Ambiente ambiente;
     @Autowired
-    AmbienteService service;
+    private AmbienteService service;
     @Autowired
-    UnidadeEdificacaoService unidadeEdificacaoService;
+    private UnidadeEdificacaoService unidadeEdificacaoService;
     @Autowired
-    EdificacaoService edificacaoService;
-    Binder<Ambiente> binder;
+    private EdificacaoService edificacaoService;
+    private Binder<Ambiente> binder;
 
     @PropertyId("nome")
     private TextField txtNome;
@@ -43,33 +41,14 @@ public class AmbienteForm extends CadastroFormBaseGenerics<Ambiente, AmbienteSer
     @PropertyId("ativo")
     private Checkbox ckAtivo;
     @PropertyId("unidadeEdificacao")
-    ComboBox<UnidadeEdificacao> cbUnidadeEdificacao;
-    ComboBox<Edificacao> cbEdificacao;
+    private ComboBox<UnidadeEdificacao> cbUnidadeEdificacao;
+    private ComboBox<Edificacao> cbEdificacao;
 
     // container
-    FormLayout layout;
+    private FormLayout layout;
 
     public AmbienteForm() {
         super(Ambiente.class, "Ambiente");
-
-    }
-
-    private void updateCbUnidadeEdificacao() {
-
-        // IF garante q tenha um valor selecionado na cbEdificacao
-        // para evitar nullpointerException nas combos aninhadas.
-        if (cbEdificacao.getValue() != null) {
-            cbUnidadeEdificacao.setItems(cbEdificacao.getValue().getUnidades());
-        }
-
-    }
-
-    private void initComboxes() {
-
-        cbEdificacao.setItems(edificacaoService.findAtivos(true));
-        cbEdificacao.setItemLabelGenerator(Edificacao::getNome);
-
-        cbEdificacao.addValueChangeListener(vchange -> updateCbUnidadeEdificacao());
     }
 
     @Override
@@ -82,12 +61,12 @@ public class AmbienteForm extends CadastroFormBaseGenerics<Ambiente, AmbienteSer
         ckAtivo = new Checkbox("Ativo ?");
         ckAtivo.setValue(true);
 
-        cbUnidadeEdificacao = new ComboBox<UnidadeEdificacao>("Unidade Edificação");
+        cbUnidadeEdificacao = new ComboBox<>("Unidade Edificação");
         cbUnidadeEdificacao.setPlaceholder("Selecione uma edificação..");
         cbUnidadeEdificacao.setMinWidth("35%");
         cbUnidadeEdificacao.setItemLabelGenerator(UnidadeEdificacao::getNome);
 
-        cbEdificacao = new ComboBox<Edificacao>("Edificação");
+        cbEdificacao = new ComboBox<>("Edificação");
         cbEdificacao.setPlaceholder("Selecione uma edificação");
         cbEdificacao.setMinWidth("35%");
 
@@ -98,90 +77,34 @@ public class AmbienteForm extends CadastroFormBaseGenerics<Ambiente, AmbienteSer
         super.formLayout.add(layout);
 
         initComboxes();
+    }
 
+    private void updateCbUnidadeEdificacao() {
+        // IF garante q tenha um valor selecionado na cbEdificacao
+        // para evitar nullpointerException nas combos aninhadas.
+        if (cbEdificacao.getValue() != null) {
+            cbUnidadeEdificacao.setItems(cbEdificacao.getValue().getUnidades());
+        }
+    }
+
+    private void initComboxes() {
+        cbEdificacao.setItems(edificacaoService.findAtivos(true));
+        cbEdificacao.setItemLabelGenerator(Edificacao::getNome);
+        cbEdificacao.addValueChangeListener(e -> updateCbUnidadeEdificacao());
     }
 
     @Override
     protected void updateViewToEdit() {
-
         if (entity != null && entity.getId() != null) {
-
             List<UnidadeEdificacao> unidades = ambiente.getUnidadeEdificacao().getEdificacao().getUnidades();
-
             cbUnidadeEdificacao.setItems(unidades);
-
             cbEdificacao.setValue(ambiente.getUnidadeEdificacao().getEdificacao());
-
             binder.readBean(ambiente);
         }
-
     }
 
     @Override
     protected void getNewEntityToPersist() {
         entity = new Ambiente();
-
     }
-
 }
-
-/*
- * @Override protected boolean save() {
- *
- * String msg = "Ambiente alterado com sucesso.";
- *
- * if (!isEditMode) { ambiente = new Ambiente(); msg =
- * "Ambiente cadastrado com sucesso."; }
- *
- * try { binder.writeBean(ambiente); service.save(ambiente); showSucess(msg);
- *
- * return true;
- *
- * } catch (ValidationException e) {
- *
- * showWarnig("Verique os campos obrigatórios.");
- *
- * } catch (DataIntegrityViolationException e) {
- *
- * showWarnig("Ambiente já Cadastrado para esta edificação, verifique.");
- *
- * }
- *
- * return false;
- *
- * }
- *
- * @Override protected boolean delete() {
- *
- * try {
- *
- * service.delete(ambiente); showSucess("Ambiente removido com sucesso.");
- *
- * return true;
- *
- * } catch (DataIntegrityViolationException e) {
- *
- * showWarnig("Ambiente não pode ser removido pois está em uso.");
- *
- * } catch (Exception e) {
- *
- * showError("Erro ao remover Ambiente."); logException(e, "Erro no Delete()");
- * }
- *
- * return false;
- *
- * }
- */
-
-/*
- * @Override protected void initBinder() { binder = new
- * BeanValidationBinder<Ambiente>(Ambiente.class);
- * binder.bindInstanceFields(this);
- *
- * }
- *
- * @Override protected void clearBinder() { this.ambiente = new Ambiente();
- * binder.readBean(ambiente); ckAtivo.setValue(true); cbEdificacao.clear();
- *
- * }
- */

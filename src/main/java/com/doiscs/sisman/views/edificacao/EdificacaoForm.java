@@ -39,9 +39,9 @@ public class EdificacaoForm extends CadastroFormBase<Edificacao> {
     private Binder<Edificacao> binder;
 
     // containers
-    Accordion accordion;
-    FormLayout layoutEdificacao;
-    VerticalLayout layoutUnidadesEdificacao;
+    private Accordion accordion;
+    private FormLayout layoutEdificacao;
+    private VerticalLayout layoutUnidadesEdificacao;
 
     // Componentes de tela
     private Checkbox ckAtivo;
@@ -51,16 +51,12 @@ public class EdificacaoForm extends CadastroFormBase<Edificacao> {
     private TextArea txtDescricao;
     @PropertyId("localizacao")
     private TextField txtLocalizacao;
-
     @PropertyId("tipoEdificacao")
     private ComboBox<TipoEdificacao> cbTipoEdificacao;
-
-    Grid<UnidadeEdificacao> gridUnidades;
+    private Grid<UnidadeEdificacao> gridUnidades;
 
     public EdificacaoForm() {
-
         super("Edificação");
-
     }
 
     @Override
@@ -73,27 +69,19 @@ public class EdificacaoForm extends CadastroFormBase<Edificacao> {
         configureLayoutUnidadesEdificacao();
 
         super.formLayout.add(accordion);
-
-        // super.formLayout.add(ckAtivo, txtNome, txtLocalizacao, txtDescricao,
-        // cbTipoEdificacao);
-
     }
 
     private void configureLayoutUnidadesEdificacao() {
-
         layoutUnidadesEdificacao = new VerticalLayout();
         layoutUnidadesEdificacao.setSpacing(false);
         layoutUnidadesEdificacao.setMargin(false);
         layoutUnidadesEdificacao.setSizeFull();
 
         accordion.add("Unidades da Edificação", layoutUnidadesEdificacao);
-
     }
 
     private void configureLayoutEdificacao() {
-
         layoutEdificacao = new FormLayout();
-
         layoutEdificacao.setSizeFull();
 
         ckAtivo = new Checkbox("Ativo ?");
@@ -107,38 +95,28 @@ public class EdificacaoForm extends CadastroFormBase<Edificacao> {
         cbTipoEdificacao.setRequired(true);
 
         layoutEdificacao.add(ckAtivo, 2);
-
         layoutEdificacao.add(cbTipoEdificacao, txtNome, txtLocalizacao, txtDescricao);
-
         accordion.add("Dados da Edificação", layoutEdificacao);
-
     }
 
     @Override
     protected boolean delete() {
-
         try {
             binder.writeBean(edificacao);
             service.delete(edificacao);
-
             showSucess("Edificação removido com sucesso.");
-
             return true;
-
         } catch (ValidationException e) {
             showError("Erro ao remover Edificação.");
             e.printStackTrace();
         } catch (DataIntegrityViolationException e) {
             showWarnig("A Edificação não pode ser removido pois esta em uso.");
         }
-
         return false;
-
     }
 
     @Override
     protected boolean save() {
-
         String msg = "Edificação alterado com sucesso.";
 
         if (!isEditMode) {
@@ -150,19 +128,12 @@ public class EdificacaoForm extends CadastroFormBase<Edificacao> {
             binder.writeBean(edificacao);
             service.save(edificacao);
             showSucess(msg);
-
             return true;
-
         } catch (ValidationException e) {
-
             showWarnig("Verique os campos obrigatórios.");
-
         } catch (DataIntegrityViolationException e) {
-
             showWarnig("Edificação já cadastrada, verique.");
-
         }
-
         return false;
 
     }
@@ -179,59 +150,38 @@ public class EdificacaoForm extends CadastroFormBase<Edificacao> {
     @Override
     protected void initBinder() {
         binder = new BeanValidationBinder<Edificacao>(Edificacao.class);
-
         // Vincula compomenente ckBox ativo com getters e setters da Edificação
         binder.forField(ckAtivo).bind(Edificacao::isAtivo, Edificacao::setAtivo);
-
         binder.bindInstanceFields(this);
-
     }
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-
         cbTipoEdificacao.setItems(tipoEdificacaoService.findAtivos(true));
         cbTipoEdificacao.setItemLabelGenerator(TipoEdificacao::getNome);
-
         if (isEditMode) {
             configureToEdit();
         }
-
     }
 
     private void configureGridUnidades() {
-
         if (this.edificacao != null && this.edificacao.getUnidades() != null) {
-
             gridUnidades = new Grid<UnidadeEdificacao>(UnidadeEdificacao.class, false);
-
             gridUnidades.setItems(edificacao.getUnidades());
-
             gridUnidades.setColumns("nome", "ativo");
-
             gridUnidades.getColumnByKey("nome").setHeader("Nome Unidade");
-
             layoutUnidadesEdificacao.add(gridUnidades);
-
         } else {
-
             if (gridUnidades != null) {
-
                 layoutUnidadesEdificacao.remove(gridUnidades);
             }
         }
-
     }
 
     @Override
     protected void configureToEdit() {
-
         this.edificacao = (Edificacao) getEntityToEdit();
-
         binder.readBean(edificacao);
-
         configureGridUnidades();
-
     }
-
 }

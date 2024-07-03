@@ -27,8 +27,6 @@ import com.vaadin.flow.router.Route;
 @Route(value = "unidadeedificacao", layout = MainLayout.class)
 public class UnidadeEdificacaoForm extends CadastroFormBase<UnidadeEdificacao> {
 
-    private static final long serialVersionUID = -2499126898733987248L;
-
     private UnidadeEdificacao unidadeEdificacao;
     @Autowired
     private UnidadeEdificacaoService service;
@@ -47,19 +45,15 @@ public class UnidadeEdificacaoForm extends CadastroFormBase<UnidadeEdificacao> {
 
     public UnidadeEdificacaoForm() {
         super("Unidade Edificação");
-
     }
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-
         cbEdificacao.setItems(getEdificacoes());
         cbEdificacao.setItemLabelGenerator(Edificacao::getNome);
-
         if (isEditMode) {
             configureToEdit();
         }
-
     }
 
     @Override
@@ -79,18 +73,12 @@ public class UnidadeEdificacaoForm extends CadastroFormBase<UnidadeEdificacao> {
             return true;
 
         } catch (ValidationException e) {
-
-            showWarnig("Verique os campos obrigatórios.");
-
+            showWarnig("Verifique os campos obrigatórios.");
         } catch (DataIntegrityViolationException e) {
-
-            showWarnig("Unidade já cadastrada para esta edificação verique.");
-
+            showWarnig("Unidade já cadastrada para esta edificação verifique.");
             logException(e, "Erro método save()");
         }
-
         return false;
-
     }
 
     @Override
@@ -98,22 +86,16 @@ public class UnidadeEdificacaoForm extends CadastroFormBase<UnidadeEdificacao> {
 
         try {
             service.delete(unidadeEdificacao);
-
             showSucess("Unidade removida com sucesso.");
-
             return true;
-
         } catch (DataIntegrityViolationException e) {
-            showWarnig(
-                    "Unidade não pode ser removida pois esta em uso. Mova todos os ambientes para outra unidade antes de excluir.");
+            showWarnig("Unidade não pode ser removida pois esta em uso. Mova todos os ambientes para outra unidade antes de excluir.");
         }
         return false;
-
     }
 
     @Override
     protected void initViewComponents() {
-
         ckAtivo = new Checkbox("Ativo ?");
         ckAtivo.setValue(true);
         txtNome = new TextField("Nome Unidade");
@@ -125,19 +107,16 @@ public class UnidadeEdificacaoForm extends CadastroFormBase<UnidadeEdificacao> {
         cbEdificacao.setMinWidth("35%");
 
         super.formLayout.add(ckAtivo, cbEdificacao, txtNome, txtDescricao);
-
     }
 
     private Collection<Edificacao> getEdificacoes() {
-
         return edService.findAtivos(true);
     }
 
     @Override
     protected void initBinder() {
-        binder = new BeanValidationBinder<UnidadeEdificacao>(UnidadeEdificacao.class);
+        binder = new BeanValidationBinder<>(UnidadeEdificacao.class);
         binder.bindInstanceFields(this);
-
     }
 
     @Override
@@ -145,15 +124,11 @@ public class UnidadeEdificacaoForm extends CadastroFormBase<UnidadeEdificacao> {
         unidadeEdificacao = new UnidadeEdificacao();
         binder.readBean(unidadeEdificacao);
         ckAtivo.setValue(true);
-
     }
 
     @Override
     protected void configureToEdit() {
-
         this.unidadeEdificacao = (UnidadeEdificacao) getEntityToEdit();
         binder.readBean(unidadeEdificacao);
-
     }
-
 }

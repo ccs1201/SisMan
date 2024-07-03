@@ -1,8 +1,9 @@
 package com.doiscs.sisman.domain.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.validation.constraints.NotEmpty;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class TipoEquipamento extends AbstractEntity {

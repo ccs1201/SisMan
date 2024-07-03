@@ -15,11 +15,7 @@ import com.vaadin.flow.router.Route;
 @Route(value = "tipoedificacaolist", layout = MainLayout.class)
 public class TipoEdificacaoList extends ListFormBase<TipoEdificacao, TipoEdificacaoService> {
 
-
-    private static final long serialVersionUID = 7760827194193323623L;
-
     public TipoEdificacaoList() {
-
     }
 
     @Override
@@ -33,12 +29,10 @@ public class TipoEdificacaoList extends ListFormBase<TipoEdificacao, TipoEdifica
             ck.setReadOnly(true);
             return ck;
         })).setHeader("Ativo");
-
     }
 
     @Override
     protected void navigateTo() {
         UI.getCurrent().navigate(TipoEdificacaoForm.class);
     }
-
 }

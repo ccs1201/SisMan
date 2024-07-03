@@ -15,34 +15,23 @@ import com.vaadin.flow.router.Route;
 @Route(value = "unidadeedificacaolist", layout = MainLayout.class)
 public class UnidadeEdificacaoList extends ListFormBase<UnidadeEdificacao, UnidadeEdificacaoService> {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 5210447109636593096L;
-
     @Override
     protected void initViewComponents() {
-
         grid = new Grid<UnidadeEdificacao>(UnidadeEdificacao.class, false);
         grid.addColumns("nome", "edificacao.nome");
 
         grid.getColumnByKey("nome").setHeader("Nome Unidade");
-
         grid.getColumnByKey("edificacao.nome").setHeader("Edificação");
-
         grid.addColumn(new ComponentRenderer<>(var -> {
             Checkbox ck = new Checkbox();
             ck.setValue(var.isAtivo());
             ck.setReadOnly(true);
             return ck;
         })).setHeader("Ativo");
-
     }
 
     @Override
     protected void navigateTo() {
         UI.getCurrent().navigate(UnidadeEdificacaoForm.class);
-
     }
-
 }

@@ -29,33 +29,26 @@ public class AmbienteList extends ListFormBase<Ambiente, AmbienteService> {
         grid.getColumnByKey("descricao").setHeader("Descrição");
         grid.getColumnByKey("nome").setHeader("Nome Ambiente");
 
-        grid.addColumn(new ComponentRenderer<>(var -> {
+        grid.addColumn(new ComponentRenderer<>(e -> {
             Checkbox ck = new Checkbox();
-            ck.setValue(var.isAtivo());
+            ck.setValue(e.isAtivo());
             ck.setReadOnly(true);
             return ck;
         })).setHeader("Ativo");
 
     }
 
+    @Override
     protected void updateGrid() {
-
         if (txtpesquisa == null || txtpesquisa.isEmpty()) { //
-
             grid.setItems(service.findAllEager());
-
         } else {
-
             grid.setItems(service.findByNomeEager(txtpesquisa.getValue())); //
-
         }
-
     }
 
     @Override
     protected void navigateTo() {
         UI.getCurrent().navigate(AmbienteForm.class);
-
     }
-
 }

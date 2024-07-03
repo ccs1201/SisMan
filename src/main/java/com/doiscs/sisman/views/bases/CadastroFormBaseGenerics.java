@@ -1,7 +1,7 @@
 package com.doiscs.sisman.views.bases;
 
-import javax.annotation.PostConstruct;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.doiscs.sisman.domain.services.ServiceInterface;
@@ -27,59 +27,37 @@ import com.vaadin.flow.server.VaadinServletRequest;
 public abstract class CadastroFormBaseGenerics<T, SERVICE extends ServiceInterface<T>> extends FormLayout
         implements BeforeEnterObserver {
 
-    private static final long serialVersionUID = 7069232922824142288L;
-
     protected T entity;
     @Autowired
     private SERVICE service;
-
     private final Class<T> beanClass;
-
     private Binder<T> binder;
-
-    private String nomeDoBean;
+    private final String nomeDoBean;
     private boolean isEditMode;
-
-    private Button btnSave = new Button("Salvar");
+    private final Button btnSave = new Button("Salvar");
     protected Button btnDelete = new Button("Excluir");
-    private Button btnCancel = new Button("Cancelar");
-
+    private final Button btnCancel = new Button("Cancelar");
     protected VerticalLayout formLayout = new VerticalLayout();
-
-
     private HorizontalLayout buttonsLayout = new HorizontalLayout();
 
-    public CadastroFormBaseGenerics(Class<T> beanClass, String nomeDoBean) {
-
+    protected CadastroFormBaseGenerics(Class<T> beanClass, String nomeDoBean) {
         this.beanClass = beanClass;
-
         this.nomeDoBean = nomeDoBean;
-
     }
 
     protected abstract void initViewComponents();
 
     @PostConstruct
     private void inicialize() {
-
         checkEditMode();
-
         initBinder();
-
         initViewComponents();
-
         addComponentAsFirst(formLayout);
-
         configureFormLayout();
-
         getEntityToEdit();
-
         if (isEditMode) {
-
             updateViewToEdit();
         }
-
-
     }
 
 
@@ -88,9 +66,7 @@ public abstract class CadastroFormBaseGenerics<T, SERVICE extends ServiceInterfa
     }
 
     protected void initBinder() {
-
         binder = new BeanValidationBinder<T>(beanClass);
-
     }
 
     protected void setPlaceHolders(String beanName) {
@@ -110,14 +86,11 @@ public abstract class CadastroFormBaseGenerics<T, SERVICE extends ServiceInterfa
 
             Component c = formLayout.getComponentAt(i);
 
-            if (c.getClass().getName().equals("com.vaadin.flow.component.textfield.TextField")) {
-
-                TextField aux = (TextField) c;
-                aux.setPlaceholder(aux.getLabel() + " " + beanName + "...");
-                aux.setClearButtonVisible(true);
-
+            if (c instanceof com.vaadin.flow.component.textfield.TextField) {
+                TextField tf = (TextField) c;
+                tf.setPlaceholder(tf.getLabel() + " " + beanName + "...");
+                tf.setClearButtonVisible(true);
             }
-
         }
     }
 
@@ -205,98 +178,73 @@ public abstract class CadastroFormBaseGenerics<T, SERVICE extends ServiceInterfa
 
     private void delete() {
         try {
-
             service.delete(entity);
             clearForm();
             showSucess(nomeDoBean + " removida(o) com sucesso.");
-
         } catch (DoisCsCrudException e) {
             showWarnig(nomeDoBean + " não pode ser removida(o), pois existem registros que dependem dele. %/n "
                     + "Inative-o para que não seja mais exibido.");
         }
-
     }
 
     @SuppressWarnings("unchecked")
     private void getEntityToEdit() throws ClassCastException {
 
         if (isEditMode) {
-
             btnDelete.setVisible(true);
             this.entity = (T) VaadinServletRequest.getCurrent().getAttribute("entityToEdit");
-
         }
-
     }
 
     private boolean checkEditMode() {
-
         if (VaadinServletRequest.getCurrent().getAttribute("entityToEdit") != null) {
-
             isEditMode = true;
         } else {
             isEditMode = false;
         }
-
         return isEditMode;
-
     }
 
     /**
      * Sempre deve ser chamado após um click no botão salvar, cancelar ou excluir
      */
     protected void clearForm() {
-
         // Desabilita o botão para excluir um Bean Cadastrado
         btnDelete.setVisible(false);
 
         // Seta editmode para falso, garantido que a proxima interação
         // seja com um bean novo
         isEditMode = false;
-
         clearBinder();
-
     }
 
     protected void clearBinder() {
-
         binder.readBean(null);
-
     }
 
     protected void showSucess(String message) {
-
         createNotification(message, NotificationVariant.LUMO_SUCCESS, 5000);
-
     }
 
     protected void showError(String message) {
-
         createNotification(message, NotificationVariant.LUMO_ERROR, 5000);
-
     }
 
     protected void showWarnig(String message) {
         createNotification(message, NotificationVariant.LUMO_CONTRAST, 10000);
-
     }
 
     private void createNotification(String message, NotificationVariant variant, int duration) {
-
         Notification n = new Notification(message);
         n.setDuration(duration);
         n.addThemeVariants(variant);
         n.setPosition(Position.TOP_CENTER);
-
         n.open();
-
     }
 
     protected void logException(Exception e, String logDesc) {
-
         System.out.println("################  " + logDesc.toUpperCase() + " $$ " + getClass().getSimpleName()
                 + "  ################");
-
         e.printStackTrace();
 
     }
@@ -307,14 +255,9 @@ public abstract class CadastroFormBaseGenerics<T, SERVICE extends ServiceInterfa
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-
         binder.bindInstanceFields(this);
         if (entity != null) {
-
             getBinder().readBean(entity);
-
         }
-
     }
-
 }

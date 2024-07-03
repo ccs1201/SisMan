@@ -8,24 +8,16 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 
 @Route(layout = MainLayout.class, value = "marcatest")
-
 public class MarcaTest extends CadastroFormBaseGenerics<Marca, MarcaService> {
-
-    private static final long serialVersionUID = 8976084434804100853L;
-
-    TextField nome;
-
-    // MarcaService marcaService;
+    private TextField nome;
 
     public MarcaTest() {
         super(Marca.class, "Marca");
-
     }
 
     @Override
     protected void getNewEntityToPersist() {
         entity = new Marca();
-
     }
 
     @Override
@@ -33,5 +25,4 @@ public class MarcaTest extends CadastroFormBaseGenerics<Marca, MarcaService> {
         nome = new TextField("nome");
         super.formLayout.add(nome);
     }
-
 }

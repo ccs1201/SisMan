@@ -2,7 +2,7 @@ package com.doiscs.sisman.domain.data.repositories;
 
 import java.util.List;
 
-import javax.persistence.OrderBy;
+import jakarta.persistence.OrderBy;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

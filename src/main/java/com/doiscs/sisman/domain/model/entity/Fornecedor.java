@@ -1,10 +1,10 @@
 package com.doiscs.sisman.domain.model.entity;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.NotEmpty;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"razaoSocial", "nomeFantasia",

@@ -44,24 +44,19 @@ public class EquipamentoForm extends CadastroFormBase<Equipamento> {
     private Binder<Equipamento> binder;
 
     // containers
-    FormLayout layout;
+    private FormLayout layout;
 
     // Componentes de tela
     @PropertyId("ativo")
     private Checkbox ckAtivo;
-
     @PropertyId("descricao")
     private TextArea txaDescricao;
-
     @PropertyId("tipoEquipamento")
     private ComboBox<TipoEquipamento> cbTipoEquipamento;
-
     @PropertyId("marca")
     private ComboBox<Marca> cbMarca;
-
     @PropertyId("ambiente")
     private ComboBox<Ambiente> cbAmbiente;
-
     @PropertyId("nome")
     private TextField txtNome;
 
@@ -72,8 +67,7 @@ public class EquipamentoForm extends CadastroFormBase<Equipamento> {
     private ComboBox<UnidadeEdificacao> cbUnidadeEdificacao;
 
     public EquipamentoForm() {
-        super(" ");
-
+        super("Equipamento");
     }
 
     @Override
@@ -83,7 +77,6 @@ public class EquipamentoForm extends CadastroFormBase<Equipamento> {
         ckAtivo.setValue(true);
 
         txtNome = new TextField("Nome Equipamento");
-
         txaDescricao = new TextArea("Descrição Equipamento");
 
         cbTipoEquipamento = new ComboBox<TipoEquipamento>("Tipo de Equipamento");
@@ -113,10 +106,8 @@ public class EquipamentoForm extends CadastroFormBase<Equipamento> {
         dataCompra = new DatePicker("Data da Compra");
         garantiaAte = new DatePicker("Garantia Até");
 
-
         layout = new FormLayout();
         layout.add(ckAtivo, 2);
-
         layout.add(cbTipoEquipamento, cbMarca, txtNome, cbEdificacao, cbUnidadeEdificacao, cbAmbiente, dataCompra,
                 garantiaAte);
 
@@ -125,120 +116,91 @@ public class EquipamentoForm extends CadastroFormBase<Equipamento> {
     }
 
     private void updateCbAmbiente() {
-
         UnidadeEdificacao unidadeEdificacao = cbUnidadeEdificacao.getValue();
 
         if (unidadeEdificacao != null) {
-
             unidadeEdificacao.setAmbientes(ambienteService.findByUnidadeEdificacaoId(unidadeEdificacao.getId()));
             cbAmbiente.setItems(unidadeEdificacao.getAmbientes());
             cbAmbiente.setEnabled(true);
             cbAmbiente.setHelperText(null);
 
             if (unidadeEdificacao.getAmbientes() == null) {
-
                 showWarnig("Nenhum Ambiente cadastrado para Unidade " + unidadeEdificacao.getNome()
                         + ", cadastre o Ambiente antes de cadastrar um equipamento.");
             }
-
         }
     }
 
     private void updateCbUnidadeEdificacao() {
-
         Edificacao edificacao = cbEdificacao.getValue();
 
         if (edificacao != null) {
-
             if (!edificacao.getUnidades().isEmpty()) {
                 cbUnidadeEdificacao.setItems(cbEdificacao.getValue().getUnidades());
                 cbUnidadeEdificacao.setEnabled(true);
                 cbUnidadeEdificacao.setHelperText(null);
             } else {
-
                 showWarnig("Nenhuma Unidade cadastrada para Edificação" + edificacao.getNome()
                         + ", cadastre uma unidade antes de cadastrar um Equipamento.");
             }
         } else {
-
             clearComboBoxes();
             disableComboboxes();
         }
     }
 
     private void disableComboboxes() {
-
         cbUnidadeEdificacao.setEnabled(false);
-
         cbAmbiente.setEnabled(false);
-
     }
 
     private void clearComboBoxes() {
         cbUnidadeEdificacao.clear();
         cbAmbiente.clear();
-
     }
 
     private Collection<Marca> getMarcas() {
-
         return marcaService.findAll();
     }
 
     private Collection<TipoEquipamento> getTipoEquipamento() {
-
         return tipoEquipamentoService.findAll();
     }
 
     @Override
     protected boolean delete() {
-
         try {
-
             service.delete(equipamento);
             showSucess("Equipamento: " + equipamento.getDescricao() + " excluído com sucesso.");
-
             return true;
-
         } catch (DataIntegrityViolationException e) {
             showWarnig("Equipamento não pode ser excluído pois está em uso.");
         } catch (Exception e) {
             showError("Erro ao excluir equipamento.");
-
             logException(e, "erro delete EquipamentoForm");
         }
-
         return false;
     }
 
     @Override
     protected boolean save() {
-
         String msg = "Equipamento alterado com sucesso.";
-
         if (this.equipamento == null) {
             msg = "Equipamento cadastrado com sucesso.";
             equipamento = new Equipamento();
         }
 
         try {
-
             binder.writeBean(equipamento);
-
             service.save(equipamento);
             showSucess(msg);
             return true;
-
         } catch (ValidationException e) {
             showWarnig("Verifique os campos obrigatórios.");
-
         } catch (DataIntegrityViolationException e) {
-
             showWarnig("Equipamento ja cadastrado para o ambiente.");
         }
-
         return false;
-
     }
 
     @Override
@@ -246,7 +208,6 @@ public class EquipamentoForm extends CadastroFormBase<Equipamento> {
         equipamento = new Equipamento();
         binder.setBean(equipamento);
         updateViewPostSaveOrEdit();
-
     }
 
     private void updateViewPostSaveOrEdit() {
@@ -262,7 +223,6 @@ public class EquipamentoForm extends CadastroFormBase<Equipamento> {
         // garantindo o aninhamento das combos.
         cbUnidadeEdificacao.setEnabled(false);
         cbAmbiente.setEnabled(false);
-
     }
 
     @Override
@@ -274,54 +234,35 @@ public class EquipamentoForm extends CadastroFormBase<Equipamento> {
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-
         cbMarca.setItems(getMarcas());
-
         cbTipoEquipamento.setItems(getTipoEquipamento());
-
         cbEdificacao.setItems(getEdificacoes());
-
         if (isEditMode) {
             configureToEdit();
-
         }
-
     }
 
     private Collection<Edificacao> getEdificacoes() {
-
         return edificacaoService.findAtivos(true);
     }
 
     private void enbaleComboBoxes() {
         cbAmbiente.setEnabled(true);
         cbUnidadeEdificacao.setEnabled(true);
-
     }
 
     @Override
     protected void configureToEdit() {
         this.equipamento = (Equipamento) getEntityToEdit();
-
         enbaleComboBoxes();
-
         cbMarca.setValue(equipamento.getMarca());
-
         cbTipoEquipamento.setValue(equipamento.getTipoEquipamento());
-
         cbEdificacao.setValue(equipamento.getAmbiente().getUnidadeEdificacao().getEdificacao());
-
         updateCbUnidadeEdificacao();
-
         cbUnidadeEdificacao.setValue(equipamento.getAmbiente().getUnidadeEdificacao());
-
         updateCbAmbiente();
-
         cbAmbiente.setValue(this.equipamento.getAmbiente());
         updateCbAmbiente();
-
         binder.readBean(equipamento);
-
     }
-
 }

@@ -17,19 +17,12 @@ import com.vaadin.flow.server.VaadinServletRequest;
 @Route(value = "edificacaolist", layout = MainLayout.class)
 public class EdificacaoList extends ListFormBase<Edificacao, EdificacaoService> {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-
     @Override
     protected void initViewComponents() {
         initGrid();
-
     }
 
     private void initGrid() {
-
         grid = new Grid<Edificacao>(Edificacao.class, false);
         grid.addColumns("nome", "localizacao", "descricao", "tipoEdificacao.nome");
 
@@ -43,31 +36,22 @@ public class EdificacaoList extends ListFormBase<Edificacao, EdificacaoService> 
             ck.setReadOnly(true);
             return ck;
         })).setHeader("Ativo");
-
     }
 
     @Override
     protected void edit() {
-
         try {
             Edificacao edificacao = getEntityFromGrid();
-
             edificacao.setUnidades(service.getUnidades(edificacao));
-
             VaadinServletRequest.getCurrent().setAttribute("entityToEdit", edificacao);
             navigateTo();
-
         } catch (DoisCsViewExcepion e) {
-
             showWarnig(e.getLocalizedMessage());
         }
     }
 
     @Override
     protected void navigateTo() {
-
         UI.getCurrent().navigate(EdificacaoForm.class);
-
     }
-
 }
