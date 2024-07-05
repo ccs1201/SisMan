@@ -15,12 +15,10 @@ import com.vaadin.flow.router.Route;
 @Route(value = "fornecedorlist", layout = MainLayout.class)
 public class FornecedorList extends ListFormBase<Fornecedor, FornecedorService> {
 
-    private static final long serialVersionUID = -5756730032398361591L;
-
     @Override
     protected void initViewComponents() {
 
-        grid = new Grid<Fornecedor>(Fornecedor.class, false);
+        grid = new Grid<>(Fornecedor.class, false);
 
         grid.addColumns("nomeFantasia", "razaoSocial", "cnpj", "telefone", "endereco.estado.nome",
                 "endereco.municipio.nome");

@@ -26,7 +26,6 @@ import java.util.Collection;
 @Route(value = "equipamento", layout = MainLayout.class)
 public class EquipamentoForm extends CadastroFormBase<Equipamento> {
 
-    private static final long serialVersionUID = 3118572104602973670L;
     @Autowired
     private EquipamentoService service;
     @Autowired

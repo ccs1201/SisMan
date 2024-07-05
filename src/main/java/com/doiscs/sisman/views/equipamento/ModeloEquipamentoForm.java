@@ -29,7 +29,6 @@ import com.vaadin.flow.router.Route;
 @Route(value = "modeloequipamento", layout = MainLayout.class)
 public class ModeloEquipamentoForm extends CadastroFormBase<ModeloEquipamento> {
 
-    private static final long serialVersionUID = -5515074552183860407L;
     @Autowired
     private ModeloEquipamentoService service;
     @Autowired

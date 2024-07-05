@@ -15,8 +15,6 @@ import com.vaadin.flow.router.Route;
 @Route(value = "marca-list", layout = MainLayout.class)
 public class MarcasList extends ListFormBase<Marca, MarcaService> {
 
-    private static final long serialVersionUID = 1L;
-
     @Override
     protected void initViewComponents() {
 

@@ -15,13 +15,10 @@ import com.vaadin.flow.router.Route;
 @Route(value = "tipoequipamentolist", layout = MainLayout.class)
 public class TipoEquipamentoList extends ListFormBase<TipoEquipamento, TipoEquipamentoService> {
 
-
-    private static final long serialVersionUID = 3784613160493727215L;
-
     @Override
     protected void initViewComponents() {
 
-        grid = new Grid<TipoEquipamento>(TipoEquipamento.class, false);
+        grid = new Grid<>(TipoEquipamento.class, false);
         grid.addColumns("nome");
 
         grid.addColumn(new ComponentRenderer<>(var -> {

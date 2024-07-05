@@ -22,7 +22,7 @@ public class MarcaTest extends CadastroFormBaseGenerics<Marca, MarcaService> {
 
     @Override
     protected void initViewComponents() {
-        nome = new TextField("nome");
+        nome = new TextField("Nome");
         super.formLayout.add(nome);
     }
 }

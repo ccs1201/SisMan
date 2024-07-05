@@ -16,10 +16,8 @@ import com.vaadin.flow.router.Route;
 @Route(value = "tipoequipamento", layout = MainLayout.class)
 public class TipoEquipamentoForm extends CadastroFormBaseGenerics<TipoEquipamento, TipoEquipamentoService> {
 
-    private static final long serialVersionUID = 77975384732589151L;
     @Autowired
-    TipoEquipamentoService service;
-    TipoEquipamento tipoEquipamento;
+    private TipoEquipamentoService service;
 
     // componentes de tela
     @PropertyId("nome")

@@ -23,7 +23,7 @@ public class EdificacaoList extends ListFormBase<Edificacao, EdificacaoService> 
     }
 
     private void initGrid() {
-        grid = new Grid<Edificacao>(Edificacao.class, false);
+        grid = new Grid<>(Edificacao.class, false);
         grid.addColumns("nome", "localizacao", "descricao", "tipoEdificacao.nome");
 
         grid.getColumnByKey("localizacao").setHeader("Localização");

@@ -17,7 +17,7 @@ public class UnidadeEdificacaoList extends ListFormBase<UnidadeEdificacao, Unida
 
     @Override
     protected void initViewComponents() {
-        grid = new Grid<UnidadeEdificacao>(UnidadeEdificacao.class, false);
+        grid = new Grid<>(UnidadeEdificacao.class, false);
         grid.addColumns("nome", "edificacao.nome");
 
         grid.getColumnByKey("nome").setHeader("Nome Unidade");

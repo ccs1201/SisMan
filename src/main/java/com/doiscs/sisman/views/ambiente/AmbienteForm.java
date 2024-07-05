@@ -1,15 +1,10 @@
 package com.doiscs.sisman.views.ambiente;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.doiscs.sisman.domain.model.entity.Ambiente;
 import com.doiscs.sisman.domain.model.entity.Edificacao;
 import com.doiscs.sisman.domain.model.entity.UnidadeEdificacao;
 import com.doiscs.sisman.domain.services.impl.AmbienteService;
 import com.doiscs.sisman.domain.services.impl.EdificacaoService;
-import com.doiscs.sisman.domain.services.impl.UnidadeEdificacaoService;
 import com.doiscs.sisman.views.MainLayout;
 import com.doiscs.sisman.views.bases.CadastroFormBaseGenerics;
 import com.vaadin.flow.component.checkbox.Checkbox;
@@ -21,15 +16,17 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.PropertyId;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 @PageTitle("Cadastro Ambiente")
 @Route(value = "ambiente", layout = MainLayout.class)
 public class AmbienteForm extends CadastroFormBaseGenerics<Ambiente, AmbienteService> {
+
     private Ambiente ambiente;
     @Autowired
     private AmbienteService service;
-    @Autowired
-    private UnidadeEdificacaoService unidadeEdificacaoService;
     @Autowired
     private EdificacaoService edificacaoService;
     private Binder<Ambiente> binder;

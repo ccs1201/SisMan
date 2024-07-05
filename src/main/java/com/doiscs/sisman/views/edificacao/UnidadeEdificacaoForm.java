@@ -69,9 +69,7 @@ public class UnidadeEdificacaoForm extends CadastroFormBase<UnidadeEdificacao> {
             binder.writeBean(unidadeEdificacao);
             service.save(unidadeEdificacao);
             showSucess(msg);
-
             return true;
-
         } catch (ValidationException e) {
             showWarnig("Verifique os campos obrigatórios.");
         } catch (DataIntegrityViolationException e) {
@@ -83,7 +81,6 @@ public class UnidadeEdificacaoForm extends CadastroFormBase<UnidadeEdificacao> {
 
     @Override
     protected boolean delete() {
-
         try {
             service.delete(unidadeEdificacao);
             showSucess("Unidade removida com sucesso.");
@@ -102,8 +99,7 @@ public class UnidadeEdificacaoForm extends CadastroFormBase<UnidadeEdificacao> {
         txtNome.setMinWidth("35%");
         txtDescricao = new TextArea("Descrição");
         txtDescricao.setMinWidth("35%");
-
-        cbEdificacao = new ComboBox<Edificacao>("Edificação");
+        cbEdificacao = new ComboBox<>("Edificação");
         cbEdificacao.setMinWidth("35%");
 
         super.formLayout.add(ckAtivo, cbEdificacao, txtNome, txtDescricao);

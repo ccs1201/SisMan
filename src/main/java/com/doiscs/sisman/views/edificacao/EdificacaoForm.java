@@ -29,7 +29,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 @Route(value = "edificacao", layout = MainLayout.class)
 public class EdificacaoForm extends CadastroFormBase<Edificacao> {
 
-    private static final long serialVersionUID = -2949189158075447111L;
     @Autowired
     private EdificacaoService service;
     @Autowired

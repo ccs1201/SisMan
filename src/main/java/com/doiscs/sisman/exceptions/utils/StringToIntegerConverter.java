@@ -6,7 +6,6 @@ import com.vaadin.flow.data.converter.Converter;
 
 public class StringToIntegerConverter implements Converter<String, Integer> {
 
-
     @Override
     public Result<Integer> convertToModel(String value, ValueContext context) {
 

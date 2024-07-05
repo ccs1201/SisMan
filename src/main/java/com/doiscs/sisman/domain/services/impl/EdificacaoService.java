@@ -48,7 +48,6 @@ public class EdificacaoService implements ServiceInterface<Edificacao> {
 
     public List<Edificacao> getAmbientes(Edificacao edificacao) {
         return repository.findAmbientes(edificacao.getId());
-
     }
 
     public List<UnidadeEdificacao> getUnidades(Edificacao edificacao) {

@@ -1,23 +1,9 @@
 package com.doiscs.sisman.views;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.doiscs.sisman.domain.model.entity.Fornecedor;
 import com.doiscs.sisman.views.ambiente.AmbienteForm;
 import com.doiscs.sisman.views.ambiente.AmbienteList;
-import com.doiscs.sisman.views.edificacao.EdificacaoForm;
-import com.doiscs.sisman.views.edificacao.EdificacaoList;
-import com.doiscs.sisman.views.edificacao.TipoEdificacaoForm;
-import com.doiscs.sisman.views.edificacao.TipoEdificacaoList;
-import com.doiscs.sisman.views.edificacao.UnidadeEdificacaoForm;
-import com.doiscs.sisman.views.edificacao.UnidadeEdificacaoList;
-import com.doiscs.sisman.views.equipamento.EquipamentoForm;
-import com.doiscs.sisman.views.equipamento.EquipamentoList;
-import com.doiscs.sisman.views.equipamento.ModeloEquipamentoForm;
-import com.doiscs.sisman.views.equipamento.ModeloEquipamentoList;
-import com.doiscs.sisman.views.equipamento.TipoEquipamentoForm;
-import com.doiscs.sisman.views.equipamento.TipoEquipamentoList;
+import com.doiscs.sisman.views.edificacao.*;
+import com.doiscs.sisman.views.equipamento.*;
 import com.doiscs.sisman.views.fornecedor.FornecedorForm;
 import com.doiscs.sisman.views.fornecedor.FornecedorList;
 import com.doiscs.sisman.views.marca.MarcaForm;
@@ -26,16 +12,12 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.html.Footer;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Header;
-import com.vaadin.flow.component.html.ListItem;
-import com.vaadin.flow.component.html.Nav;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.html.UnorderedList;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The main view is a top-level placeholder for other views.

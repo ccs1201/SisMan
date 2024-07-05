@@ -15,8 +15,6 @@ import com.vaadin.flow.router.Route;
 @Route(value = "modeloequipamentolist", layout = MainLayout.class)
 public class ModeloEquipamentoList extends ListFormBase<ModeloEquipamento, ModeloEquipamentoService> {
 
-    private static final long serialVersionUID = 2516403695651614441L;
-
     @Override
     protected void initViewComponents() {
         super.grid = new Grid<ModeloEquipamento>(ModeloEquipamento.class, false);

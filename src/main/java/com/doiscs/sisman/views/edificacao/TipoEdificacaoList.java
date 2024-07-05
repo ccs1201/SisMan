@@ -20,7 +20,7 @@ public class TipoEdificacaoList extends ListFormBase<TipoEdificacao, TipoEdifica
 
     @Override
     protected void initViewComponents() {
-        grid = new Grid<TipoEdificacao>(TipoEdificacao.class, false);
+        grid = new Grid<>(TipoEdificacao.class, false);
         grid.addColumns("nome", "descricao");
 
         grid.addColumn(new ComponentRenderer<>(var -> {

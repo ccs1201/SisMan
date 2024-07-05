@@ -15,8 +15,6 @@ import com.vaadin.flow.router.Route;
 @Route(value = "ambientelist", layout = MainLayout.class)
 public class AmbienteList extends ListFormBase<Ambiente, AmbienteService> {
 
-    private static final long serialVersionUID = 2748596595018861685L;
-
     @Override
     protected void initViewComponents() {
 

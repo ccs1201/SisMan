@@ -20,7 +20,6 @@ import com.vaadin.flow.router.Route;
 @Route(value = "tipoedificacao", layout = MainLayout.class)
 public class TipoEdificacaoForm extends CadastroFormBase<TipoEdificacao> {
 
-    private static final long serialVersionUID = 502295675321182436L;
     private TipoEdificacao tipoEdificacao;
     @Autowired
     private TipoEdificacaoService service;
@@ -52,7 +51,6 @@ public class TipoEdificacaoForm extends CadastroFormBase<TipoEdificacao> {
             return true;
         } catch (ValidationException e) {
             showError("Erro ao remover Tipo de Edificação.");
-            e.printStackTrace();
         } catch (DataIntegrityViolationException e) {
             showWarnig("Tipo de Edificação não pode ser removido pois esta em uso.");
         }
