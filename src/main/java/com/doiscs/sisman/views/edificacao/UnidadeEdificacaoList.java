@@ -1,7 +1,7 @@
 package com.doiscs.sisman.views.edificacao;
 
 import com.doiscs.sisman.domain.model.entity.UnidadeEdificacao;
-import com.doiscs.sisman.domain.services.UnidadeEdificacaoService;
+import com.doiscs.sisman.domain.services.impl.UnidadeEdificacaoService;
 import com.doiscs.sisman.views.MainLayout;
 import com.doiscs.sisman.views.bases.ListFormBase;
 import com.vaadin.flow.component.UI;

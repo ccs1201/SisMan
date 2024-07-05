@@ -1,7 +1,7 @@
 package com.doiscs.sisman.views.bases.teste;
 
 import com.doiscs.sisman.domain.model.entity.Marca;
-import com.doiscs.sisman.domain.services.MarcaService;
+import com.doiscs.sisman.domain.services.impl.MarcaService;
 import com.doiscs.sisman.views.MainLayout;
 import com.doiscs.sisman.views.bases.CadastroFormBaseGenerics;
 import com.vaadin.flow.component.textfield.TextField;

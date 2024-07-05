@@ -43,9 +43,6 @@ import com.vaadin.flow.router.RouterLink;
 @PageTitle("Main")
 public class MainLayout extends AppLayout {
 
-
-    private static final long serialVersionUID = -4243594958791597867L;
-
     public static class MenuItemInfo {
 
         private String text;

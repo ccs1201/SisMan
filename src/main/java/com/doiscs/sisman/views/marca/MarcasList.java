@@ -1,7 +1,7 @@
 package com.doiscs.sisman.views.marca;
 
 import com.doiscs.sisman.domain.model.entity.Marca;
-import com.doiscs.sisman.domain.services.MarcaService;
+import com.doiscs.sisman.domain.services.impl.MarcaService;
 import com.doiscs.sisman.views.MainLayout;
 import com.doiscs.sisman.views.bases.ListFormBase;
 import com.vaadin.flow.component.UI;

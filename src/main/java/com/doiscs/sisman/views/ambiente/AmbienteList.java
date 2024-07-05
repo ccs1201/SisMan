@@ -1,7 +1,7 @@
 package com.doiscs.sisman.views.ambiente;
 
 import com.doiscs.sisman.domain.model.entity.Ambiente;
-import com.doiscs.sisman.domain.services.AmbienteService;
+import com.doiscs.sisman.domain.services.impl.AmbienteService;
 import com.doiscs.sisman.views.MainLayout;
 import com.doiscs.sisman.views.bases.ListFormBase;
 import com.vaadin.flow.component.UI;

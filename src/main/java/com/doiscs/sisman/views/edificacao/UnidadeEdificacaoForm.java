@@ -7,8 +7,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 
 import com.doiscs.sisman.domain.model.entity.Edificacao;
 import com.doiscs.sisman.domain.model.entity.UnidadeEdificacao;
-import com.doiscs.sisman.domain.services.EdificacaoService;
-import com.doiscs.sisman.domain.services.UnidadeEdificacaoService;
+import com.doiscs.sisman.domain.services.impl.EdificacaoService;
+import com.doiscs.sisman.domain.services.impl.UnidadeEdificacaoService;
 import com.doiscs.sisman.views.MainLayout;
 import com.doiscs.sisman.views.bases.CadastroFormBase;
 import com.vaadin.flow.component.checkbox.Checkbox;

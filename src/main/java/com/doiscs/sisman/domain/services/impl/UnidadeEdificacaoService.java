@@ -1,13 +1,14 @@
-package com.doiscs.sisman.domain.services;
-
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+package com.doiscs.sisman.domain.services.impl;
 
 import com.doiscs.sisman.domain.data.repositories.UnidadeEdificacaoRepository;
 import com.doiscs.sisman.domain.model.entity.UnidadeEdificacao;
+import com.doiscs.sisman.domain.services.ServiceInterface;
+import org.apache.commons.lang3.NotImplementedException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UnidadeEdificacaoService implements ServiceInterface<UnidadeEdificacao> {
@@ -24,31 +25,25 @@ public class UnidadeEdificacaoService implements ServiceInterface<UnidadeEdifica
     @Override
     public void delete(UnidadeEdificacao entity) {
         repository.delete(entity);
-
     }
 
     @Override
     public Optional<UnidadeEdificacao> findById(Integer id) {
-        // TODO Auto-generated method stub
         return repository.findById(id);
     }
 
     @Override
     public List<UnidadeEdificacao> findAll() {
-        // TODO Auto-generated method stub
         return repository.findAll();
     }
 
     @Override
     public List<UnidadeEdificacao> findByNome(String nome) {
-        // TODO Auto-generated method stub
         return repository.findByNome(nome);
     }
 
     @Override
     public List<UnidadeEdificacao> findAtivos(boolean ativo) {
-        System.out.println("não implementado");
-        return null;
+        throw new NotImplementedException();
     }
-
 }

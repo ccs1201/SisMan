@@ -11,7 +11,8 @@ import com.doiscs.sisman.domain.model.entity.TipoEdificacao;
 
 public interface TipoEdificacaoRepository extends JpaRepository<TipoEdificacao, Integer> {
 
-    @Query("select te from TipoEdificacao te where te.nome like CONCAT ('%', :nome, '%') ORDER BY nome ASC ")
+    @Query("select te from TipoEdificacao te where te.nome like CONCAT ('%', :nome, '%') " +
+            "ORDER BY nome ASC ")
     List<TipoEdificacao> findByNome(String nome);
 
     @Query("select te from TipoEdificacao te order by nome asc")

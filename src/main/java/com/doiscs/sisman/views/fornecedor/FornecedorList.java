@@ -1,7 +1,7 @@
 package com.doiscs.sisman.views.fornecedor;
 
 import com.doiscs.sisman.domain.model.entity.Fornecedor;
-import com.doiscs.sisman.domain.services.FornecedorService;
+import com.doiscs.sisman.domain.services.impl.FornecedorService;
 import com.doiscs.sisman.views.MainLayout;
 import com.doiscs.sisman.views.bases.ListFormBase;
 import com.vaadin.flow.component.UI;

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.doiscs.sisman.domain.model.entity.TipoEdificacao;
-import com.doiscs.sisman.domain.services.TipoEdificacaoService;
+import com.doiscs.sisman.domain.services.impl.TipoEdificacaoService;
 import com.doiscs.sisman.views.MainLayout;
 import com.doiscs.sisman.views.bases.CadastroFormBase;
 import com.vaadin.flow.component.checkbox.Checkbox;

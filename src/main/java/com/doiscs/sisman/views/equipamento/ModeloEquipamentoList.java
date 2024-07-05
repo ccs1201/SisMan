@@ -1,7 +1,7 @@
 package com.doiscs.sisman.views.equipamento;
 
 import com.doiscs.sisman.domain.model.entity.ModeloEquipamento;
-import com.doiscs.sisman.domain.services.ModeloEquipamentoService;
+import com.doiscs.sisman.domain.services.impl.ModeloEquipamentoService;
 import com.doiscs.sisman.views.MainLayout;
 import com.doiscs.sisman.views.bases.ListFormBase;
 import com.vaadin.flow.component.UI;

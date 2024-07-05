@@ -3,7 +3,7 @@ package com.doiscs.sisman.views.equipamento;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.doiscs.sisman.domain.model.entity.TipoEquipamento;
-import com.doiscs.sisman.domain.services.TipoEquipamentoService;
+import com.doiscs.sisman.domain.services.impl.TipoEquipamentoService;
 import com.doiscs.sisman.views.MainLayout;
 import com.doiscs.sisman.views.bases.CadastroFormBaseGenerics;
 import com.vaadin.flow.component.checkbox.Checkbox;

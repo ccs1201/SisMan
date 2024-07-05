@@ -1,7 +1,7 @@
 package com.doiscs.sisman.views.edificacao;
 
 import com.doiscs.sisman.domain.model.entity.Edificacao;
-import com.doiscs.sisman.domain.services.EdificacaoService;
+import com.doiscs.sisman.domain.services.impl.EdificacaoService;
 import com.doiscs.sisman.exceptions.DoisCsViewExcepion;
 import com.doiscs.sisman.views.MainLayout;
 import com.doiscs.sisman.views.bases.ListFormBase;

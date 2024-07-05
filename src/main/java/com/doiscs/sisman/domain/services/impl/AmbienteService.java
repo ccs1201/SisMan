@@ -1,71 +1,59 @@
-package com.doiscs.sisman.domain.services;
+package com.doiscs.sisman.domain.services.impl;
+
+import com.doiscs.sisman.domain.data.repositories.AmbienteRepository;
+import com.doiscs.sisman.domain.model.entity.Ambiente;
+import com.doiscs.sisman.domain.services.ServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-
-import com.doiscs.sisman.domain.data.repositories.AmbienteRepository;
-import com.doiscs.sisman.domain.model.entity.Ambiente;
-
 @Service
 public class AmbienteService implements ServiceInterface<Ambiente> {
     @Autowired
-    private AmbienteRepository repo;
+    private AmbienteRepository repository;
 
     @Override
     public Ambiente save(Ambiente entity) {
-
         entity.setNome(entity.getNome().toUpperCase());
-
-        return repo.save(entity);
+        return repository.save(entity);
     }
 
     @Override
     public void delete(Ambiente entity) {
-        repo.delete(entity);
-
+        repository.delete(entity);
     }
 
     @Override
     public Optional<Ambiente> findById(Integer id) {
-
-        return repo.findById(id);
+        return repository.findById(id);
     }
 
     @Override
     public List<Ambiente> findAll() {
-
-        return repo.findAll();
+        return repository.findAll();
     }
 
     @Override
     public List<Ambiente> findByNome(String nome) {
-
-        return repo.findByNome(nome);
+        return repository.findByNome(nome);
     }
 
     @Override
     public List<Ambiente> findAtivos(boolean ativo) {
-
-        return repo.findAtivos(ativo);
+        return repository.findAtivos(ativo);
     }
 
     public List<Ambiente> findAllEager() {
-        return repo.findAllEager();
+        return repository.findAllEager();
     }
 
     public List<Ambiente> findByNomeEager(String nome) {
-
-        return repo.findByNomeEager(nome);
-
+        return repository.findByNomeEager(nome);
     }
 
-    public List<Ambiente> findByUnidadeEdificacaoId(int edficacaoId){
-        return repo.findByUnidadeEdificacaoId(edficacaoId);
-
+    public List<Ambiente> findByUnidadeEdificacaoId(int edficacaoId) {
+        return repository.findByUnidadeEdificacaoId(edficacaoId);
     }
-
 }

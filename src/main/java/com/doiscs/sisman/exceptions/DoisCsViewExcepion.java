@@ -11,5 +11,4 @@ public class DoisCsViewExcepion extends Exception {
     public DoisCsViewExcepion(String msg, Throwable cause) {
         super(msg, cause);
     }
-
 }

@@ -1,7 +1,7 @@
 package com.doiscs.sisman.views.equipamento;
 
 import com.doiscs.sisman.domain.model.entity.*;
-import com.doiscs.sisman.domain.services.*;
+import com.doiscs.sisman.domain.services.impl.*;
 import com.doiscs.sisman.views.MainLayout;
 import com.doiscs.sisman.views.bases.CadastroFormBase;
 import com.vaadin.flow.component.checkbox.Checkbox;

@@ -12,7 +12,6 @@ public interface EstadoRepository extends JpaRepository<Estado, Integer> {
     @Query("select e from Estado e where nome like concat ('%', :nome, '%') order by nome asc")
     List<Estado> findByNome(String nome);
 
-
     @Query("select distinct e from Estado e join fetch e.municipios m order by e.nome, m.nome ASC")
     List<Estado> findAllEager();
 
